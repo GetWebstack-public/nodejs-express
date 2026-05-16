@@ -1,22 +1,33 @@
 {
   "name": "nodejs-express",
   "version": "1.0.0",
-  "registry": {
-    "mode": "local"
-  },
   "services": [
     {
       "name": "nodejs-express",
       "path": ".",
-      "image": "nodejs-express",
-      "manifests": ".gws/k8s",
-      "dockerfile": ".gws/Dockerfile"
+      "port": 3000,
+      "hosts": ["nodejs-express.nodejs-express.local.getwebstack.dev"],
+      "dockerfile": ".gws/services/nodejs-express/Dockerfile",
+      "manifests": ".gws/services/nodejs-express/k8s",
+      "fileSync": true,
+      "fileSyncIgnore": [
+        "node_modules/",
+        "dist/",
+        "build/",
+        "coverage/",
+        "/.git",
+        "/.idea",
+        "/.vscode",
+        "/.DS_Store",
+        "*.log"
+      ]
     }
   ],
   "provision": {
     "environments": {
       "dev": {
-        "type": "k3d"
+        "type": "k3d",
+        "default": true
       }
     }
   }

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodejs-express
-  namespace: nodejs-express
   labels:
     app: nodejs-express
 spec:
@@ -23,4 +22,9 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: PORT
+          value: "3000"
       restartPolicy: Always
